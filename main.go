@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"go_api_mux_gorm/handlers"
+	"go_api_mux_gorm/models"
 	"log"
 	"net/http"
 
@@ -12,6 +13,11 @@ import (
 
 func main() {
 	fmt.Println("Starting Program...")
+
+
+	//Enable database Migrations
+	// This will create the tables in the database, better keep commet this line after the first execution
+	//models.Migrations()
 
 	// Create a new router
 	mux := mux.NewRouter()
