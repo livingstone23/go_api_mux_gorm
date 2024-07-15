@@ -14,10 +14,9 @@ import (
 func main() {
 	fmt.Println("Starting Program...")
 
-
 	//Enable database Migrations
 	// This will create the tables in the database, better keep commet this line after the first execution
-	//models.Migrations()
+	models.Migrations()
 
 	// Create a new router
 	mux := mux.NewRouter()
@@ -31,10 +30,14 @@ func main() {
 	mux.HandleFunc(prefix+"example", handlers.Example_post).Methods("POST")
 	mux.HandleFunc(prefix+"example/{id:[0-9]+}", handlers.Example_put).Methods("PUT")
 	mux.HandleFunc(prefix+"example/{id:[0-9]+}", handlers.Example_delete).Methods("DELETE")
-
 	// Upload file
 	mux.HandleFunc(prefix+"upload", handlers.Example_upload).Methods("POST")
 
+
+	// Categories routes
+	mux.HandleFunc(prefix+"categories", handlers.Category_get).Methods("GET")
+
+	
 	// CORS
 	handler := cors.AllowAll().Handler(mux)
 
