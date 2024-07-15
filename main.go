@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"go_api_mux_gorm/handlers"
-	"go_api_mux_gorm/models"
+	
 	"log"
 	"net/http"
 
@@ -16,7 +16,8 @@ func main() {
 
 	//Enable database Migrations
 	// This will create the tables in the database, better keep commet this line after the first execution
-	models.Migrations()
+	//"go_api_mux_gorm/models"
+	//models.Migrations()
 
 	// Create a new router
 	mux := mux.NewRouter()
@@ -36,6 +37,10 @@ func main() {
 
 	// Categories routes
 	mux.HandleFunc(prefix+"categories", handlers.Category_get).Methods("GET")
+	mux.HandleFunc(prefix+"categories/{id:[0-9]+}", handlers.Category_with_parameters).Methods("GET")
+	mux.HandleFunc(prefix+"categories", handlers.Category_new).Methods("POST")
+	mux.HandleFunc(prefix+"categories/{id:[0-9]+}", handlers.Category_update).Methods("PUT")
+	mux.HandleFunc(prefix+"categories/{id:[0-9]+}", handlers.Category_delete).Methods("DELETE")
 
 	
 	// CORS
