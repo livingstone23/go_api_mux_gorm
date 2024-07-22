@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"go_api_mux_gorm/handlers"
-	
 	"log"
 	"net/http"
 
@@ -34,7 +33,6 @@ func main() {
 	// Upload file
 	mux.HandleFunc(prefix+"upload", handlers.Example_upload).Methods("POST")
 
-
 	// Categories routes
 	mux.HandleFunc(prefix+"categories", handlers.Category_get).Methods("GET")
 	mux.HandleFunc(prefix+"categories/{id:[0-9]+}", handlers.Category_with_parameters).Methods("GET")
@@ -42,7 +40,16 @@ func main() {
 	mux.HandleFunc(prefix+"categories/{id:[0-9]+}", handlers.Category_update).Methods("PUT")
 	mux.HandleFunc(prefix+"categories/{id:[0-9]+}", handlers.Category_delete).Methods("DELETE")
 
-	
+	// Products routes
+	mux.HandleFunc(prefix+"products", handlers.Product_get).Methods("GET")
+	mux.HandleFunc(prefix+"products", handlers.Product_new).Methods("POST")
+	mux.HandleFunc(prefix+"products/{id:[0-9]+}", handlers.Product_with_parameters).Methods("GET")
+	mux.HandleFunc(prefix+"products/{id:[0-9]+}", handlers.Product_update).Methods("PUT")
+	mux.HandleFunc(prefix+"products/{id:[0-9]+}", handlers.Product_delete).Methods("DELETE")
+
+
+
+
 	// CORS
 	handler := cors.AllowAll().Handler(mux)
 
