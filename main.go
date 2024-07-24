@@ -5,9 +5,9 @@ import (
 	"go_api_mux_gorm/handlers"
 	"log"
 	"net/http"
-
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
+
 )
 
 func main() {
@@ -48,6 +48,8 @@ func main() {
 	mux.HandleFunc(prefix+"products/{id:[0-9]+}", handlers.Product_delete).Methods("DELETE")
 
 
+	// Products Pictures routes
+	mux.HandleFunc(prefix+"products-pictures/{id:[0-9]+}", handlers.ProductPicture_Upload).Methods("POST")
 
 
 	// CORS

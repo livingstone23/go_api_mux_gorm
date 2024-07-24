@@ -27,7 +27,24 @@ type Product struct {
 
 type Products []Product
 
+
+type ProductPicture struct {
+	Id 	   		uint   `gorm:"primaryKey;autoIncrement" json:"id"`
+	Name 		string `gorm:"type:varchar(100);" json:"name"`
+	ProductID 	uint   `gorm:"type:int;" json:"product_id"`
+	Product 	Product `json:"product"`
+}
+
+type ProductPictures []ProductPicture
+
+
+
 func Migrations() {
-	database.Database.AutoMigrate(&Product{})
+	database.Database.AutoMigrate(&ProductPicture{})
+	//database.Database.AutoMigrate(&Product{})
 	//database.Database.AutoMigrate(&Category{})
+
+	//Una unica manera de habilitar el total de migraciones
+	//database.Database.AutoMigrate(&ProductPicture{}, &Product{}, &Category{} )
+
 }
