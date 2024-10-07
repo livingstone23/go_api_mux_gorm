@@ -8,7 +8,7 @@ import (
 )
 
 
-
+// Database is the connection handle
 var Database = func () (db *gorm.DB) {
 	// Load the .env file
 	errorVar := godotenv.Load()
@@ -17,7 +17,7 @@ var Database = func () (db *gorm.DB) {
 	}
 
 
-	//Create domain service name
+	//Create domain service name for open the connection to the database
 	dsn := os.Getenv("DB_USER")+":"+os.Getenv("DB_PASSWORD")+"@tcp("+os.Getenv("DB_SERVER")+":"+os.Getenv("DB_PORT")+")/"+os.Getenv("DB_NAME")+"?charset=utf8mb4&parseTime=True&loc=Local"
 
 	// Open the connection to the database

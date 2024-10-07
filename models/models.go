@@ -38,12 +38,37 @@ type ProductPicture struct {
 type ProductPictures []ProductPicture
 
 
+//Create the structures for users
+type User struct {
+	Id       uint   `gorm:"primaryKey;autoIncrement" json:"id"`
+	PerfilID uint   `gorm:"type:int;" json:"perfil_id"`
+	Perfil   Perfil `json:"perfil"`
+	Name 	string 	`gorm:"type:varchar(100);" json:"Name"`
+	Email 	string 	`gorm:"type:varchar(100);" json:"email"`
+	Phone 	string 	`gorm:"type:varchar(100);" json:"phone"`
+	Password string `gorm:"type:varchar(100);" json:"password"`
+	DateRegister time.Time `gorm:"type:datetime;" json:"date_register"`
+}
 
+type Users []User
+
+
+type Perfil struct {
+	Id   uint   `gorm:"primaryKey;autoIncrement" json:"id"`
+	Name string `gorm:"type:varchar(100);" json:"name"`
+}
+
+type Perfils []Perfil
+
+
+
+//Method to create the tables in the database
 func Migrations() {
-	database.Database.AutoMigrate(&ProductPicture{})
+	//database.Database.AutoMigrate(&ProductPicture{})
 	//database.Database.AutoMigrate(&Product{})
 	//database.Database.AutoMigrate(&Category{})
 
+	database.Database.AutoMigrate(&User{}, &Perfil{} )
 	//Una unica manera de habilitar el total de migraciones
 	//database.Database.AutoMigrate(&ProductPicture{}, &Product{}, &Category{} )
 

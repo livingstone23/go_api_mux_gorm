@@ -23,6 +23,7 @@ func Product_get(response http.ResponseWriter, request *http.Request) {
 	//database.Database.Find(&data)
 
 	//Link datasbase to the model and order by id desc
+	//Preload is used to bring the relationship data
 	database.Database.Order("id desc").Preload("Category").Find(&data)
 
 	//Set the response status

@@ -3,11 +3,12 @@ package main
 import (
 	"fmt"
 	"go_api_mux_gorm/handlers"
+	"go_api_mux_gorm/middleware"
 	"log"
 	"net/http"
+
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
-
 )
 
 func main() {
@@ -47,9 +48,19 @@ func main() {
 	mux.HandleFunc(prefix+"products/{id:[0-9]+}", handlers.Product_update).Methods("PUT")
 	mux.HandleFunc(prefix+"products/{id:[0-9]+}", handlers.Product_delete).Methods("DELETE")
 
-
 	// Products Pictures routes
 	mux.HandleFunc(prefix+"products-pictures/{id:[0-9]+}", handlers.ProductPicture_Upload).Methods("POST")
+	mux.HandleFunc(prefix+"products-pictures/{id:[0-9]+}", handlers.ProductPicture_GetByProduct).Methods("GET")
+	mux.HandleFunc(prefix+"products-pictures/{id:[0-9]+}", handlers.ProductPicture_Delete).Methods("DELETE")
+
+
+	//Security routes
+	mux.HandleFunc(prefix+"security/register", handlers.Security_register).Methods("POST")
+	mux.HandleFunc(prefix+"security/login", handlers.Security_login).Methods("POST")
+
+
+	// Route Protected, using the Middleware
+	mux.HandleFunc(prefix+"security/protected", middleware.ValidateJWT(handlers.Security_protected)).Methods("GET")
 
 
 	// CORS

@@ -9,7 +9,6 @@ import (
 	"os"
 	"strings"
 	"time"
-
 	"github.com/gorilla/mux"
 )
 
@@ -121,6 +120,7 @@ func Example_upload(response http.ResponseWriter, request *http.Request) {
 	var fileName = string(time[4][6:14]) + "." + extension
 	var filestring string = "public/uploads/files" + fileName
 
+	// Create a new file
 	f, err := os.OpenFile(filestring, os.O_WRONLY|os.O_CREATE, 0777)
 	if err != nil {
 		http.Error(response, "Error uploading file ! "+err.Error(), http.StatusBadRequest)
